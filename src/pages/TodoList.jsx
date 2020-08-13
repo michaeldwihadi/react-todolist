@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 
-import Paper from "../components/Paper";
-import Header from "../components/Header";
-import TodoForm from "../components/TodoForm";
-import Todos from "../components/Todos";
+import Paper from "../components/paper/Paper";
+import Header from "../components/header/HeaderNoJSX";
+import TodoForm from "../components/todoform/TodoForm";
+import Todos from "../components/todos/Todos";
+
+import Container from "../layout/Container";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([
@@ -14,7 +16,7 @@ const TodoList = () => {
 
   const [showAdd, setShowAdd] = useState(false);
 
-  const addTodo = value => {
+  const addTodo = (value) => {
     if (todos.length < 10) {
       const addedTodo = [...todos, { text: value, isCompleted: false }];
 
@@ -24,7 +26,7 @@ const TodoList = () => {
     }
   };
 
-  const completeTodo = index => {
+  const completeTodo = (index) => {
     const addedTodo = [...todos];
     addedTodo[index].isCompleted = !addedTodo[index].isCompleted;
 
@@ -38,13 +40,19 @@ const TodoList = () => {
   console.log("todos", todos);
   return (
     <Paper>
-      <Header
-        showAddToggle={showAddToggle}
-        showAdd={showAdd}
-        clearTodos={clearTodos}
-      />
-      <TodoForm addTodo={addTodo} showAdd={showAdd} />
-      <Todos todos={todos} completeTodo={completeTodo} />
+      <Container
+        flexDirection="column"
+        justifyContent="space-between"
+        height="100%"
+      >
+        <Header
+          showAddToggle={showAddToggle}
+          showAdd={showAdd}
+          clearTodos={clearTodos}
+        />
+        <TodoForm addTodo={addTodo} showAdd={showAdd} />
+        <Todos todos={todos} completeTodo={completeTodo} />
+      </Container>
     </Paper>
   );
 };
