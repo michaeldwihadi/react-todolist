@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { withTheme } from "emotion-theming";
 
-const styledButton = styled.button`
+const StyledButton = styled.button`
   font-size: 1.8rem;
   font-family: "Bungee", sans-serif;
   color: ${(props) => props.textColor};
@@ -37,15 +37,16 @@ class Button extends React.Component {
         textColor = primary.black;
     }
     return (
-      <styledButton textColor={textColor} align={align} onClick={onClick}>
+      <StyledButton textColor={textColor} align={align} onClick={onClick}>
         {text}
-      </styledButton>
+      </StyledButton>
     );
   }
 
   static defaultProps = {
     text: "Button",
-    color: "black"
+    color: "black",
+    align: "left"
   };
 
   static propTypes = {

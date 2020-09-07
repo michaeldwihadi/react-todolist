@@ -1,20 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import Paper from "../components/paper/Paper";
-import Header from "../components/header/HeaderNoJSX";
-import TodoForm from "../components/todoform/TodoForm";
-import Todos from "../components/todos/Todos";
+import Paper from "../components/paper/PaperClass";
+import Header from "../components/header/HeaderClass";
+import TodoForm from "../components/todoform/TodoFormClass";
+import Todos from "../components/todos/TodosClass";
 
 import Container from "../layout/Container";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState([
-    { text: "Learning React 1", isCompleted: false },
-    { text: "Learning React 2", isCompleted: false },
-    { text: "Learning React 3", isCompleted: false }
-  ]);
+  // const [todos, setTodos] = useState([
+  //   { text: "Learning React 1", isCompleted: false },
+  //   { text: "Learning React 2", isCompleted: false },
+  //   { text: "Learning React 3", isCompleted: false }
+  // ]);
+
+  const [todos, setTodos] = useState(
+    JSON.parse(localStorage.getItem("todos")) || []
+  );
 
   const [showAdd, setShowAdd] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (value) => {
     if (todos.length < 10) {
