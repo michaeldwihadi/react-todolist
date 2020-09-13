@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import Paper from "../components/paper/PaperClass";
-import Header from "../components/header/HeaderClass";
-import TodoForm from "../components/todoform/TodoFormClass";
-import Todos from "../components/todos/TodosClass";
+import useStateWithLocalStorage from "../hooks/useStateWithLocalStorage";
+import Paper from "../components/paper/Paper";
+import Header from "../components/header/Header";
+import TodoForm from "../components/todoform/TodoForm";
+import Todos from "../components/todos/Todos";
 
 import Container from "../layout/Container";
 
@@ -14,20 +15,21 @@ const TodoList = () => {
   //   { text: "Learning React 3", isCompleted: false }
   // ]);
 
-  const [todos, setTodos] = useState(
-    JSON.parse(localStorage.getItem("todos")) || []
-  );
+  // const [todos, setTodos] = useState(
+  //   JSON.parse(localStorage.getItem("todos")) || []
+  // );
+
+  const [todos, setTodos] = useStateWithLocalStorage("todos");
 
   const [showAdd, setShowAdd] = useState(false);
 
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  // useEffect(() => {
+  //   localStorage.setItem("todos", JSON.stringify(todos));
+  // }, [todos]);
 
   const addTodo = (value) => {
     if (todos.length < 10) {
       const addedTodo = [...todos, { text: value, isCompleted: false }];
-
       setTodos(addedTodo);
     } else {
       alert("Only 10 todos is allowed!");
